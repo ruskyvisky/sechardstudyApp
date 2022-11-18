@@ -1,0 +1,30 @@
+{
+  "name": "sechard",
+  "version": "1.0.0",
+  "description": "Sechard Study Case",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruskyvisky/sechardstudyApp.git"
+  },
+  "keywords": [
+    "react",
+    "express",
+    "full",
+    "stack"
+  ],
+  "author": "Numan Dirican",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ruskyvisky/sechardstudyApp/issues"
+  },
+  "homepage": "https://github.com/ruskyvisky/sechardstudyApp#readme",
+  "dependencies": {
+    "concurrently": "^7.5.0",
+    "express": "^4.18.2"
+  }
+}
