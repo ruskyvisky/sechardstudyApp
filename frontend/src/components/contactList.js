@@ -33,6 +33,7 @@ export default class ContactList extends Component {
           </tr>
         </thead>
         <tbody>
+          
          {
             contacts.map(contact =>{
                 const {id,name,address,phone,mobile_phone,email} = contact;
@@ -44,9 +45,10 @@ export default class ContactList extends Component {
                 mobile_phone = {mobile_phone}
                 email = {email}
                 />
+                
             })
          }
-          
+         
         </tbody>
       </table>
     )
