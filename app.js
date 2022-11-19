@@ -10,7 +10,7 @@ const PORT = 5000 || process.env.PORT;
 
 app.use(bodyParser.json()) // GELEN JSONU PARSE EDİYORUM POSTMAN KULLANIYORUM HENÜZ
 
-app.use("/contacts",router);
+app.use("/contacts",router); 
 
 mongoose.connect("mongodb+srv://ruskyvisky:numan123@phonecluster.jlgueqe.mongodb.net/?retryWrites=true&w=majority",
 (e) => {

@@ -3,12 +3,14 @@ const express = require('express')
 const router = express.Router()
 const model = require("../Models/ContactsModel")
 
-router.get('/',(res,req)=>{
-   model.find().then(contacts=>{
-    res.json(contacts) 
-   }).catch(error=>{
-   res.json(error)
-   }) // all contacts fetch
+router.get('/',(req,res)=>{
+    model.find()
+    .then((contact) => {
+      res.json(contact);
+    })
+    .catch((err) => {
+      res.json(err);
+    }); // all contacts fetch
 })
 router.get(":/id", (req,res)=>{
     console.log('fetch contact ${req.params.id}') // spesific contact fetch
@@ -29,11 +31,32 @@ router.post("/test",(req,res)=>{ // route will change
  // create method
 })
 
-router.delete(":/id",(res,req)=>{
-    console.log("delete contact  ${req.params.id} ") // delete method
+router.delete("/:id",(req,res)=>{
+    Product.findByIdAndDelete(req.params.id)
+    .then((contact) => {
+      res.json(contact);
+    })
+    .catch((err) => {
+      res.json(err);
+    }); // delete method
  })
 
- router.put(":/id",(res,req)=>{
+ router.put("/:id",(req,res)=>{
+ 
+    model.findByIdAndUpdate(req.params.id, {
+        name : req.body.name,
+        address : req.body.address,
+        phone : req.body.phone,
+        email : req.body.email,
+        mobile_phone : req.body.mobile_phone
+      })
+        .then((contact) => {
+          res.json(contact);
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+
     console.log("uptade contact  ${req.params.id}") // uptade method
  })
 

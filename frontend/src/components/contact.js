@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import DeleteButton from './deleteButton';
+import UptadeButton from './uptadeButton';
 export default class Contact extends Component {
   render() {
     const {name,address,phone,mobile_phone,email} = this.props;
@@ -12,8 +13,11 @@ export default class Contact extends Component {
         <td>{mobile_phone}</td>
         <td>{email}</td>
         <td>
-          <button className='btn btn-danger mx-3'> Delete</button>
-          <button className='btn btn-success'>Uptade</button>
+       <DeleteButton/>
+     
+        </td>
+        <td>
+        <UptadeButton/>
         </td>
       </tr>
       

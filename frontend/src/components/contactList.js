@@ -10,7 +10,7 @@ export default class ContactList extends Component {
 
  }
  componentDidMount() {  
-        fetch("/api/contacts")
+        fetch("/contacts")
         .then(res=> res.json().then(data => {
             this.setState({
                 contacts : data
