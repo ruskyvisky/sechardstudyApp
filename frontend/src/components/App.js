@@ -1,7 +1,7 @@
 import React from 'react'
-import SearchBar from './components/searchBar'
-import ContactList from './components/contactList'
-import AddContact from './components/addContact'
+import SearchBar from './searchBar'
+import ContactList from './contactList'
+import AddContact from './addContact'
 
 
 

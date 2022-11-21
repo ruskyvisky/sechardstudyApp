@@ -21,6 +21,7 @@ export default class ContactList extends Component {
         )
 }
 
+
 delContact =  (contact) => { // DELETE METHOD APİ CALLS
   console.log(contact)
   axios.delete(`http://localhost:5000/contacts/${contact}`)
@@ -50,27 +51,16 @@ delContact =  (contact) => { // DELETE METHOD APİ CALLS
           
             contacts.map((contact,i) =>{
                 const {id,name,address,phone,mobile_phone,email} = contact;
-                return (
-                  <tr key={i}>  
-                          <td>{name}</td>
-                          <td>{address}</td>
-                          <td>{phone}</td>
-                          <td>{mobile_phone}</td>
-                          <td>{email}</td>
-                          <td>
-                         {/* <DeleteButton /> */}
-                         <button className='btn btn-danger ' type='button' onClick={()=>{this.delContact(id)}} > Delete</button>
-                          </td>
-                          <td>
-                      
-                          </td>
-                        </tr>
-                        
-                          
-                          
-                      
-                    
-                  )
+                return <Contact
+                key={i}
+                id = {id}
+                name = {name}
+                address = {address}
+                phone = {phone}
+                mobile_phone = {mobile_phone}
+                email = {email}
+                delContactProp= {this.delContact}
+                />
                 
             })
          }
@@ -80,3 +70,29 @@ delContact =  (contact) => { // DELETE METHOD APİ CALLS
     )
   }
 }
+
+
+// return (
+//   <tr key={i}>  
+//           <td>{name}</td>
+//           <td>{address}</td>
+//           <td>{phone}</td>
+//           <td>{mobile_phone}</td>
+//           <td>{email}</td>
+//           <td>
+//          {/* <DeleteButton /> */}
+//          <button className='btn btn-danger ' type='button' onClick={()=>{this.delContact(id)}} > Delete</button>
+//           </td>
+//           <td>
+      
+//           </td>
+//         </tr>
+        
+          
+          
+      
+    
+//   )
+
+
+

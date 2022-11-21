@@ -1,13 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import Test from  './components/test'
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  { 
+    path: "/",
+    element: <App/>,
+  },
+  {
+    path : "/addcontact", // I'm trying routing :D 
+    element: <Test/>
+  }
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
   <React.StrictMode>
-<App/>
+  <RouterProvider router={router} />
    
   </React.StrictMode>
    
