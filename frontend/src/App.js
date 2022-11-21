@@ -1,13 +1,17 @@
-import React, { Component } from 'react'
-import Contact from './components/contactList'
+import React from 'react'
 import SearchBar from './components/searchBar'
-export default class App extends Component {
-  render() {
-    return (
-      <div className='container'>
-        <SearchBar/>
-        <Contact/>
-      </div>
-    )
-  }
+import ContactList from './components/contactList'
+import AddContact from './components/addContact'
+
+
+
+
+export default function App() {
+  return (
+    <div className='container'>
+    <SearchBar/>
+    <ContactList/>
+    <AddContact></AddContact>
+  </div>
+  )
 }

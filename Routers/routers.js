@@ -4,9 +4,11 @@ const router = express.Router()
 const model = require("../Models/ContactsModel")
 
 router.get('/',(req,res)=>{
+    
     model.find()
     .then((contact) => {
       res.json(contact);
+      
     })
     .catch((err) => {
       res.json(err);
@@ -32,7 +34,8 @@ router.post("/test",(req,res)=>{ // route will change
 })
 
 router.delete("/:id",(req,res)=>{
-    Product.findByIdAndDelete(req.params.id)
+    
+    model.findByIdAndDelete(req.params.id)
     .then((contact) => {
       res.json(contact);
     })

@@ -22,9 +22,10 @@ export default class ContactList extends Component {
     render() {
    const {contacts} = this.state; 
     return (
-        <table class="table">
+        <table className="table">
         <thead>
           <tr>
+          
             <th scope="col">Name</th>
             <th scope="col">Address </th>
             <th scope="col">Phone</th>
@@ -35,10 +36,11 @@ export default class ContactList extends Component {
         <tbody>
           
          {
-            contacts.map(contact =>{
+            contacts.map((contact,i) =>{
                 const {id,name,address,phone,mobile_phone,email} = contact;
                 return <Contact
-                key={id}
+                key={i}
+                id = {id}
                 name = {name}
                 address = {address}
                 phone = {phone}

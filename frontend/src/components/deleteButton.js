@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class DeleteButton extends Component {
-  render() {
+ const  DeleteButton=()=> {
+   
+  
     return (
+        
       <div>
      
         <button className='btn btn-danger ' type='button' data-toggle="modal" data-target="#deletemodal"> Delete</button>
@@ -22,7 +24,7 @@ export default class DeleteButton extends Component {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-danger"  >Delete</button>
       </div>
     </div>
   </div>
@@ -30,5 +32,6 @@ export default class DeleteButton extends Component {
       </div>
         
     )
-  }
+  
 }
+export default DeleteButton;
