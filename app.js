@@ -2,11 +2,20 @@
 const express = require('express')
 const app = express()  // 
 const mongoose = require("mongoose")
-
 const bodyParser = require("body-parser")
 const router = require("./Routers/routers")
+const cors=require("cors");
+
 // VARİABLES
 const PORT = 5000 || process.env.PORT;
+
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ }
+
+ app.use(cors(corsOptions)) // Use this after the variable declaration
 
 app.use(bodyParser.json()) // GELEN JSONU PARSE EDİYORUM POSTMAN KULLANIYORUM HENÜZ
 

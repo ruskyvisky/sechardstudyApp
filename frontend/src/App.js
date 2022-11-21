@@ -5,10 +5,11 @@ import AddContact from './components/addContact'
 
 
 
-
 export default function App() {
   return (
     <div className='container'>
+
+      
     <SearchBar/>
     <ContactList/>
     <AddContact></AddContact>

@@ -52,8 +52,12 @@ export default class AddContact extends Component {
                     address: Yup.string().required("Address is required"),
                     phone: Yup.string().required("Phone is required"),
                     mobile_phone: Yup.string().nullable(),
-                    email: Yup.string(),
+                    email: Yup.string().email(),
                   })}
+
+                  onSubmit={(values,{setSubmitting,resetForm})=>{
+                     console.log(values)
+                  }}
                 >
                   {({
                     values,
@@ -70,42 +74,65 @@ export default class AddContact extends Component {
                         <label htmlFor="name" className="form-label mx-3">
                           Contact Name
                         </label>
-                        <input type="text" id="name" />
+                        <input type="text" id="name" 
+                        value={values.name}
+                        onChange={handleChange}
+                        />
+                        {errors.name && touched.name (
+                          <div className="input-feedback">test {errors.name}</div>
+                        )}
                       </div>
 
                       <div className="mb-3">
                         <label htmlFor="address" className="form-label mx-3">
                           Address
                         </label>
-                        <input type="text" id="address" />
+                        <input type="text" id="address" 
+                        value={values.address}
+                        onChange={handleChange}
+                        />
                       </div>
 
                       <div className="mb-3">
-                        {" "}
-                        <label htmlFor="number" className="form-label mx-3">
-                          Number
+                       
+                        <label htmlFor="phone" className="form-label mx-3">
+                          Phone
                         </label>
-                        <input type="number" name="number" />
+                        <input type="tel" name="phone" 
+                         value={values.phone}
+                         onChange={handleChange}
+                        />
                       </div>
 
                       <div className="mb-3">
-                      <label htmlFor="mobilephone" className="form-label mx-3">
-                        {" "}
-                        Mobile Phone
-                      </label>
-                      <input type="mobilephone" name="number" />
+                        <label
+                          htmlFor="mobile_phone"
+                          className="form-label mx-3"
+                        >
+                          
+                          Mobile Phone
+                        </label>
+                        <input type="tel" name="mobile_phone" 
+                        value={values.mobile_phone}
+                        onChange={handleChange}
+                        />
                       </div>
-                 
-<div className="mb-3">
-<label htmlFor="email" className="form-label mx-3">Email</label>
-                      <input type="mail" id="email" />
-</div>
-                      
-                    </form>
-                  )}
-                </Formik>
-              </div>
-              <div className="modal-footer">
+
+                      <div className="mb-3">
+                        <label htmlFor="email" className="form-label mx-3">
+                          Email
+                        </label>
+                        <input type="mail" id="email" 
+                        value={values.email}
+                        onChange={handleChange}
+                        />
+                      </div>
+                      <button type="submit" className="btn btn-primary mx-3"
+                disabled={!dirty || isSubmitting}
+                >
+                  Add
+                </button>
+
                 <button
                   type="button"
                   className="btn btn-secondary"
@@ -113,10 +140,11 @@ export default class AddContact extends Component {
                 >
                   Close
                 </button>
-                <button type="button" className="btn btn-primary">
-                  Add
-                </button>
+                    </form>
+                  )}
+                </Formik>
               </div>
+              
             </div>
           </div>
         </div>
