@@ -1,18 +1,21 @@
-import React from 'react'
-import SearchBar from './searchBar'
-import ContactList from './contactList'
-import AddContact from './addContact'
-
-
+import React from "react";
+import SearchBar from "./searchBar";
+import ContactList from "./contactList";
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
-  return (
-    <div className='container'>
+  const navigate = useNavigate();
 
-      
-    <SearchBar/>
-    <ContactList/>
-    <AddContact></AddContact>
-  </div>
-  )
+  return (
+    <div className="container">
+      <SearchBar />
+      <ContactList />
+      <button
+        className="btn btn-primary"
+        onClick={() => navigate("addcontact")}
+      >
+        Add Contact
+      </button>
+    </div>
+  );
 }

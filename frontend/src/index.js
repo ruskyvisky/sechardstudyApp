@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import Test from  './components/test'
 
 import {
   createBrowserRouter,
   RouterProvider,
   Route,
 } from "react-router-dom";
+import AddContact from './components/addContact';
 
 const router = createBrowserRouter([
   { 
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path : "/addcontact", // I'm trying routing :D 
-    element: <Test/>
+    element: <AddContact/>
   }
 ]);
 
