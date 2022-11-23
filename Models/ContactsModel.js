@@ -12,6 +12,7 @@ const contactSchema = new mongoose.Schema(
     mobile_phone: Number,
     email : String,
 },
+
 )
 
 contactSchema.method("toJSON", function() { //  ID converting JSON Data

@@ -18,7 +18,7 @@ router.get(":/id", (req,res)=>{
     console.log('fetch contact ${req.params.id}') // spesific contact fetch
 })
 
-router.post("/test",(req,res)=>{ // route will change 
+router.post("/createuser",(req,res)=>{ // route will change 
     const newContact = new model({
         name : req.body.name,
         address : req.body.address,
@@ -27,9 +27,10 @@ router.post("/test",(req,res)=>{ // route will change
         mobile_phone : req.body.mobile_phone
     })
     res.send(req.body)
-    console.log(req.body)
+    
     newContact.save()
      res.json(newContact);
+     res.redirect('/')
  // create method
 })
 
@@ -59,8 +60,7 @@ router.delete("/:id",(req,res)=>{
         .catch((err) => {
           res.json(err);
         });
-
-    console.log("uptade contact  ${req.params.id}") // uptade method
+ // uptade method
  })
 
  module.exports = router;

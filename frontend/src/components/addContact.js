@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
-export default class AddContact extends Component {
-  render() {
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+export default function AddContact() {
+
+
+  const navigate = useNavigate();
+
+ 
     return (
       <div>
         <h1 className="m-3">Add Contact</h1>
@@ -38,8 +44,11 @@ export default class AddContact extends Component {
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
+              
               console.log(JSON.stringify(values, null, 2));
+              axios.post("http://localhost:5000/api/createuser" ,values)
               setSubmitting(false);
+              navigate("/")
             }, 400);
           }}
         >
@@ -122,5 +131,5 @@ export default class AddContact extends Component {
         </Formik>
       </div>
     );
-  }
+  
 }

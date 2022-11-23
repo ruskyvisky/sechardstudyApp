@@ -11,7 +11,7 @@ export default class ContactList extends Component {
 
  }
  componentDidMount() {  
-        fetch("/contacts") // apiden fetch ediyorum.
+        fetch("/api") // apiden fetch ediyorum.
         .then(res=> res.json().then(data => {
             this.setState({
                 contacts : data
@@ -24,7 +24,7 @@ export default class ContactList extends Component {
 
 delContact =  (contact) => { // DELETE METHOD APİ CALLS
   console.log(contact)
-  axios.delete(`http://localhost:5000/contacts/${contact}`)
+  axios.delete(`http://localhost:5000/api/${contact}`)
   const newContact = this.state.contacts.filter(
      (contactss) => contactss.id !== contact
    );

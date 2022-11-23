@@ -19,7 +19,7 @@ const corsOptions ={
 
 app.use(bodyParser.json()) // GELEN JSONU PARSE EDİYORUM POSTMAN KULLANIYORUM HENÜZ
 
-app.use("/contacts",router); 
+app.use("/api",router); 
 
 mongoose.connect("mongodb+srv://ruskyvisky:numan123@phonecluster.jlgueqe.mongodb.net/?retryWrites=true&w=majority",
 (e) => {
