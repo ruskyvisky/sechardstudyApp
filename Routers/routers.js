@@ -1,7 +1,7 @@
 // bağımlılıklar
 const express = require('express')
 const router = express.Router()
-const model = require("../Models/ContactsModel")
+const model = require("../Models/ContactsModel");
 
 router.get('/',(req,res)=>{
     
@@ -18,21 +18,28 @@ router.get(":/id", (req,res)=>{
     console.log('fetch contact ${req.params.id}') // spesific contact fetch
 })
 
-router.post("/createuser",(req,res)=>{ // route will change 
-    const newContact = new model({
-        name : req.body.name,
-        address : req.body.address,
-        phone : req.body.phone,
-        email : req.body.email,
-        mobile_phone : req.body.mobile_phone
-    })
-    res.send(req.body)
-    
-    newContact.save()
-     res.json(newContact);
-     res.redirect('/')
+router.post("/createuser", async (req,res,next)=>{  
+   
+
+try {
+  const newContact = await new model({
+    name : req.body.name,
+    address : req.body.address,
+    phone : req.body.phone,
+    email : req.body.email,
+    mobile_phone : req.body.mobile_phone
+})
+res.send(req.body)
+newContact.save()
+res.json(newContact);
+res.redirect('/')
+} catch (error) {
+  next(error)
+}
  // create method
 })
+
+
 
 router.delete("/:id",(req,res)=>{
     
@@ -51,8 +58,9 @@ router.delete("/:id",(req,res)=>{
         name : req.body.name,
         address : req.body.address,
         phone : req.body.phone,
-        email : req.body.email,
-        mobile_phone : req.body.mobile_phone
+        mobile_phone : req.body.mobile_phone,
+        email : req.body.email
+       
       })
         .then((contact) => {
           res.json(contact);

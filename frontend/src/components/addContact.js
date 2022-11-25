@@ -1,16 +1,29 @@
-import React, { Component } from "react";
+import React from "react";
 import { Formik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 export default function AddContact() {
 
 
   const navigate = useNavigate();
-
- 
+  const [results, setResults] = useState(null)
+  const [error, setError] = useState(null)
+  const getErrorView = () => {
     return (
       <div>
-        <h1 className="m-3">Add Contact</h1>
+        Oh no! Something went wrong.
+        <button onClick={() => navigate("/addcontact") }>
+          Try again
+        </button>
+      </div>
+    )
+  }
+
+
+  const addContactPage = () =>{
+    return <div>
+      <h1 className="m-3">Add Contact</h1>
         <Formik
           initialValues={{
             name: "",
@@ -43,12 +56,24 @@ export default function AddContact() {
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
+            setTimeout( async () => {
               
               console.log(JSON.stringify(values, null, 2));
-              axios.post("http://localhost:5000/api/createuser" ,values)
+
+              try {
+                const response = await axios.post("http://localhost:5000/api/createuser",values)
+                setResults(response.data)
+                
+                setError(null)
+                navigate("/")
+              } catch (err) {
+              
+                setError(err)
+                
+              }
+       
               setSubmitting(false);
-              navigate("/")
+             
             }, 400);
           }}
         >
@@ -123,12 +148,22 @@ export default function AddContact() {
                       </div>
              
              
-              <button type="submit" className="btn btn-success m-3" disabled={isSubmitting}>
-                Submit
+              <button 
+              
+              type="submit" className="btn btn-success m-3" disabled={isSubmitting}>
+                Add Contact
               </button>
             </form>
           )}
         </Formik>
+    </div>
+  }
+    return (
+
+      <div>
+{  error ?
+           getErrorView() : addContactPage()
+        }
       </div>
     );
   

@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Contact from "./contact"
 import axios from "axios"
+import SearchBar from './searchBar'
 export default class ContactList extends Component {
  constructor(props){ 
     super(props)
     this.state = {
-        contacts : []
+        contacts : [],
+        searchQuery : ""
     }
     
 
@@ -22,9 +24,13 @@ export default class ContactList extends Component {
 }
 
 
-delContact =  (contact) => { // DELETE METHOD APİ CALLS
-  console.log(contact)
-  axios.delete(`http://localhost:5000/api/${contact}`)
+searchContact = (e) => {
+  this.setState({ searchQuery: e.target.value });
+};
+
+delContact =   async (contact)  => { // DELETE METHOD APİ CALLS
+  
+  await axios.delete(`http://localhost:5000/api/${contact}`)
   const newContact = this.state.contacts.filter(
      (contactss) => contactss.id !== contact
    );
@@ -33,8 +39,36 @@ delContact =  (contact) => { // DELETE METHOD APİ CALLS
    });
 }
     render() {
-   const {contacts} = this.state; 
+    
+   let filteredContact = this.state.contacts.filter(
+    (contact) => {
     return (
+      contact.name
+        .toLowerCase()
+        .indexOf(this.state.searchQuery.toLowerCase()) !== -1 || 
+        contact.address
+        .toLowerCase()
+        .indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
+        contact.phone
+        .toString()
+        .indexOf(this.state.searchQuery) !== -1 || 
+        contact.email
+        .toLowerCase()
+        .indexOf(this.state.searchQuery.toLowerCase()) !== -1 
+    );
+  });
+    return (
+<div className="container ">
+  <div className="row">
+    <div className="col">
+    <SearchBar
+  searchContactProp={this.searchContact}
+  ></SearchBar>
+    </div>
+    <div className="col"></div>
+  </div>
+ 
+
         <table className="table">
         <thead>
           <tr>
@@ -48,8 +82,8 @@ delContact =  (contact) => { // DELETE METHOD APİ CALLS
         <tbody>
           
          {
-          
-            contacts.map((contact,i) =>{
+         
+          filteredContact.map((contact,i) =>{
                 const {id,name,address,phone,mobile_phone,email} = contact;
                 return <Contact
                 key={i}
@@ -60,39 +94,18 @@ delContact =  (contact) => { // DELETE METHOD APİ CALLS
                 mobile_phone = {mobile_phone}
                 email = {email}
                 delContactProp= {this.delContact}
+           
                 />
                 
             })
+            
          }
          
         </tbody>
       </table>
+
+      </div>
     )
   }
 }
-
-
-// return (
-//   <tr key={i}>  
-//           <td>{name}</td>
-//           <td>{address}</td>
-//           <td>{phone}</td>
-//           <td>{mobile_phone}</td>
-//           <td>{email}</td>
-//           <td>
-//          {/* <DeleteButton /> */}
-//          <button className='btn btn-danger ' type='button' onClick={()=>{this.delContact(id)}} > Delete</button>
-//           </td>
-//           <td>
-      
-//           </td>
-//         </tr>
-        
-          
-          
-      
-    
-//   )
-
-
 

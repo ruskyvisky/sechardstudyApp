@@ -1,14 +1,14 @@
 import React from "react";
-import SearchBar from "./searchBar";
+
 import ContactList from "./contactList";
 import { useNavigate } from "react-router-dom";
 
-export default function App() {
+export default function App(props) {
   const navigate = useNavigate();
 
   return (
     <div className="container">
-      <SearchBar />
+     
       <ContactList />
       <button
         className="btn btn-primary"
@@ -16,6 +16,7 @@ export default function App() {
       >
         Add Contact
       </button>
+      
     </div>
   );
 }
