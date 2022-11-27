@@ -66,9 +66,7 @@ export default function AddContact() {
                 if(response.status ===200){
                   
                 }
-                if(response.status === 500){
-                  window.alert("This number or name is already taken.")
-                }
+                
                 setError(null)
                 navigate("/")
               } catch (err) {

@@ -39,7 +39,7 @@ export default function Contact(props) {
           type="button"
           onClick={(event)=>{
            navigate(`/${id}`)
-
+props.getContactProp(id)
           }}
         >
           Uptade

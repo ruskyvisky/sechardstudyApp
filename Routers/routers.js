@@ -66,7 +66,6 @@ router.delete("/:id",(req,res)=>{
         phone : req.body.phone,
         mobile_phone : req.body.mobile_phone,
         email : req.body.email
-       
       })
         .then((contact) => {
           res.json(contact);

@@ -20,6 +20,9 @@ export default class ContactList extends Component {
   async componentDidMount()  {  
     await  this.getContact()
 }
+async componentDidUpdate(){
+  await  this.getContact()
+}
 
 
 

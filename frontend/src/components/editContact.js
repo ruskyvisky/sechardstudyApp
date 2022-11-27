@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 export default function EditContact(props) {
+const navigate = useNavigate()
 const initialState = {
   name: "",
   address: "",
@@ -19,8 +20,8 @@ const {id} = useParams()
     const res = await axios.get(`http://localhost:5000/api/${id}`)
     
     if(res.status===200){
-   console.log(res.data)
-      setData(res.data)
+  
+      setData({...res.data})
      
     }
    
@@ -32,16 +33,16 @@ const {id} = useParams()
     }
   },[id])
 const uptadeContact = async (data,id) =>{
+  console.log(id)
   const res = await axios.put(`http://localhost:5000/api/${id}`,data)
   if(res.status===200){
-    console.log(res.data)
-    console.log("veri uptadelandı")
+    navigate('/')
   }
 }
   
 const handleFormSubmit = (e) => {
   e.preventDefault();
-  uptadeContact()
+  uptadeContact(data ,id )
 }
 const handleInputChange = (e) =>{
   const {name,value} = e.target
