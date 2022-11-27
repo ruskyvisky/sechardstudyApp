@@ -1,22 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Formik } from "formik";
 import axios from "axios";
 export default function Contact(props) {
   
   const { id, name, address, phone, mobile_phone, email } = props;
-const uptadeContact =  (contact) =>{
-  axios.put(`http://localhost:5000/api/${contact}`)
-  console.log(contact)
-}
+
   const navigate = useNavigate();
-  
+ 
   return (
     
     <tr>
       <td>{name}</td>
       <td>{address}</td>
-      <td>{phone}</td>
+      <td>{phone || "deneme"}</td>
       <td>{mobile_phone}</td>
       <td>{email}</td>
       <td>
@@ -27,15 +23,24 @@ const uptadeContact =  (contact) =>{
             props.delContactProp(id);
           }}
         >
-          {" "}
+      
           Delete
         </button>
       </td>
       <td>
         <button
-        
+        id = {id}
+        name = {name}
+        address = {address}
+        phone = {phone}
+        mobile_phone = {mobile_phone }
+        email = {email}
           className="btn btn-success"
           type="button"
+          onClick={(event)=>{
+           navigate(`/${id}`)
+
+          }}
         >
           Uptade
         </button>

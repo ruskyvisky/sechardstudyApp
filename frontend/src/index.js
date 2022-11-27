@@ -5,11 +5,10 @@ import reportWebVitals from './reportWebVitals';
 
 import {
   createBrowserRouter,
-  RouterProvider,
-  
+  RouterProvider,  
 } from "react-router-dom";
 import AddContact from './components/addContact';
-
+import EditContact from './components/editContact';
 
 const router = createBrowserRouter([
   { 
@@ -20,7 +19,11 @@ const router = createBrowserRouter([
     path : "/addcontact", // I'm trying routing :D 
     element: <AddContact/>
   },
-  
+  {
+    path : "/:id",
+    element : <EditContact/>
+  }
+
   
 ]);
 

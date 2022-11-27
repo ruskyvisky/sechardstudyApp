@@ -5,7 +5,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 const contactSchema = new mongoose.Schema(
    
     {
-    
+    id : {type: mongoose.SchemaTypes.ObjectId, index: true},
     name: {
     type: String, 
     required : true,

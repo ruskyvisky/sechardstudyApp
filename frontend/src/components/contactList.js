@@ -2,26 +2,26 @@ import React, { Component } from 'react'
 import Contact from "./contact"
 import axios from "axios"
 import SearchBar from './searchBar'
+import EditContact from './editContact'
+
 export default class ContactList extends Component {
+
+
  constructor(props){ 
     super(props)
     this.state = {
         contacts : [],
-        searchQuery : ""
+        searchQuery : "",
+       
     }
     
 
  }
- componentDidMount() {  
-        fetch("/api") // apiden fetch ediyorum.
-        .then(res=> res.json().then(data => {
-            this.setState({
-                contacts : data
-            })
-        })
-        
-        )
+  async componentDidMount()  {  
+    await  this.getContact()
 }
+
+
 
 
 searchContact = (e) => {
@@ -29,7 +29,7 @@ searchContact = (e) => {
 };
 
 delContact =   async (contact)  => { // DELETE METHOD APİ CALLS
-  
+  console.log(contact)
   await axios.delete(`http://localhost:5000/api/${contact}`)
   const newContact = this.state.contacts.filter(
      (contactss) => contactss.id !== contact
@@ -37,6 +37,17 @@ delContact =   async (contact)  => { // DELETE METHOD APİ CALLS
    this.setState({
     contacts: newContact,
    });
+}
+
+getContact = async ()=>{
+  await   fetch("/api") // apiden fetch ediyorum.
+        .then(res=> res.json().then(data => {
+            this.setState({
+                contacts : data
+            })
+        })
+        
+        )
 }
     render() {
     
@@ -48,13 +59,15 @@ delContact =   async (contact)  => { // DELETE METHOD APİ CALLS
         .indexOf(this.state.searchQuery.toLowerCase()) !== -1 || 
         contact.address
         .toLowerCase()
-        .indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
+        .indexOf(this.state.searchQuery.toLowerCase()) !== -1  ||
         contact.phone
         .toString()
         .indexOf(this.state.searchQuery) !== -1 || 
         contact.email
         .toLowerCase()
         .indexOf(this.state.searchQuery.toLowerCase()) !== -1 
+        
+      
     );
   });
     return (
@@ -82,7 +95,6 @@ delContact =   async (contact)  => { // DELETE METHOD APİ CALLS
         <tbody>
           
          {
-         
           filteredContact.map((contact,i) =>{
                 const {id,name,address,phone,mobile_phone,email} = contact;
                 return <Contact
@@ -91,19 +103,20 @@ delContact =   async (contact)  => { // DELETE METHOD APİ CALLS
                 name = {name}
                 address = {address}
                 phone = {phone}
-                mobile_phone = {mobile_phone}
+                mobile_phone = {mobile_phone }
                 email = {email}
                 delContactProp= {this.delContact}
-           
+                getContactProp= {this.getContact}
                 />
                 
             })
-            
+
+          
          }
          
         </tbody>
       </table>
-
+     
       </div>
     )
   }

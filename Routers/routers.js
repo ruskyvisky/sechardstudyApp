@@ -14,8 +14,14 @@ router.get('/',(req,res)=>{
       res.json(err);
     }); // all contacts fetch
 })
-router.get(":/id", (req,res)=>{
-    console.log('fetch contact ${req.params.id}') // spesific contact fetch
+router.get("/:id", (req,res)=>{
+  model.findById(req.params.id)
+  .then((contact) => {
+    res.json(contact);
+  })
+  .catch((err) => {
+    res.json(err);
+  });// spesific contact fetch
 })
 
 router.post("/createuser", async (req,res,next)=>{  
@@ -34,7 +40,7 @@ newContact.save()
 res.json(newContact);
 res.redirect('/')
 } catch (error) {
-  next(error)
+ console.log(error)
 }
  // create method
 })
@@ -70,5 +76,7 @@ router.delete("/:id",(req,res)=>{
         });
  // uptade method
  })
+
+ 
 
  module.exports = router;

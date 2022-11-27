@@ -63,7 +63,12 @@ export default function AddContact() {
               try {
                 const response = await axios.post("http://localhost:5000/api/createuser",values)
                 setResults(response.data)
-                
+                if(response.status ===200){
+                  
+                }
+                if(response.status === 500){
+                  window.alert("This number or name is already taken.")
+                }
                 setError(null)
                 navigate("/")
               } catch (err) {
