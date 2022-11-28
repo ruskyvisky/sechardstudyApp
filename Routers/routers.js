@@ -28,6 +28,7 @@ router.post("/createuser", async (req,res,next)=>{
    
 
 try {
+ 
   const newContact = await new model({
     name : req.body.name,
     address : req.body.address,
@@ -35,12 +36,20 @@ try {
     email : req.body.email,
     mobile_phone : req.body.mobile_phone
 })
-res.send(req.body)
-newContact.save()
-res.json(newContact);
-res.redirect('/')
+
+newContact.save().then(responsee=>{
+
+  res.status(201).json(responsee);
+
+}).catch(err=>{
+  
+res.status(400).json(err)
+})
+
+
 } catch (error) {
- console.log(error)
+ 
+res.status(400).json(error)
 }
  // create method
 })

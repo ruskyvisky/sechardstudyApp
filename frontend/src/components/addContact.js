@@ -3,6 +3,8 @@ import { Formik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import {toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 export default function AddContact() {
 
 
@@ -12,8 +14,8 @@ export default function AddContact() {
   const getErrorView = () => {
     return (
       <div>
-        Oh no! Something went wrong.
-        <button onClick={() => navigate("/addcontact") }>
+        Name or phone must be unique!
+        <button onClick={() => navigate("/") }>
           Try again
         </button>
       </div>
@@ -53,31 +55,30 @@ export default function AddContact() {
             ) {
               errors.email = "Invalid email address";
             }
+
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout( async () => {
-              
+          
+
               console.log(JSON.stringify(values, null, 2));
 
               try {
                 const response = await axios.post("http://localhost:5000/api/createuser",values)
                 setResults(response.data)
-                if(response.status ===200){
-                  
-                }
-                
+                 
                 setError(null)
                 navigate("/")
               } catch (err) {
-              
+                
                 setError(err)
                 
               }
        
               setSubmitting(false);
              
-            }, 400);
+            },400);
           }}
         >
           {({
@@ -88,7 +89,7 @@ export default function AddContact() {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
+           
           }) => (
             <form onSubmit={handleSubmit} method="POST" >
               <div className="mb-3">

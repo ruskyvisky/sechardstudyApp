@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import Contact from "./contact"
 import axios from "axios"
 import SearchBar from './searchBar'
-import EditContact from './editContact'
-
 export default class ContactList extends Component {
 
 
@@ -32,7 +30,7 @@ searchContact = (e) => {
 };
 
 delContact =   async (contact)  => { // DELETE METHOD APİ CALLS
-  console.log(contact)
+
   await axios.delete(`http://localhost:5000/api/${contact}`)
   const newContact = this.state.contacts.filter(
      (contactss) => contactss.id !== contact
@@ -40,6 +38,7 @@ delContact =   async (contact)  => { // DELETE METHOD APİ CALLS
    this.setState({
     contacts: newContact,
    });
+
 }
 
 getContact = async ()=>{
@@ -69,8 +68,6 @@ getContact = async ()=>{
         contact.email
         .toLowerCase()
         .indexOf(this.state.searchQuery.toLowerCase()) !== -1 
-        
-      
     );
   });
     return (
@@ -98,6 +95,7 @@ getContact = async ()=>{
         <tbody>
           
          {
+          
           filteredContact.map((contact,i) =>{
                 const {id,name,address,phone,mobile_phone,email} = contact;
                 return <Contact
@@ -109,7 +107,7 @@ getContact = async ()=>{
                 mobile_phone = {mobile_phone }
                 email = {email}
                 delContactProp= {this.delContact}
-                getContactProp= {this.getContact}
+                
                 />
                 
             })

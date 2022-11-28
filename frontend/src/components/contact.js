@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import {  toast } from 'react-toastify';
 export default function Contact(props) {
   
   const { id, name, address, phone, mobile_phone, email } = props;
@@ -21,6 +21,7 @@ export default function Contact(props) {
           type="button"
           onClick={(event) => {
             props.delContactProp(id);
+            toast.info("User deleted.");
           }}
         >
       
@@ -29,17 +30,12 @@ export default function Contact(props) {
       </td>
       <td>
         <button
-        id = {id}
-        name = {name}
-        address = {address}
-        phone = {phone}
-        mobile_phone = {mobile_phone }
-        email = {email}
+  
           className="btn btn-success"
           type="button"
           onClick={(event)=>{
            navigate(`/${id}`)
-props.getContactProp(id)
+
           }}
         >
           Uptade
