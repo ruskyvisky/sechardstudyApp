@@ -1,90 +1,80 @@
-// bağımlılıklar
-const express = require('express')
-const router = express.Router()
+// MODULES
+const express = require("express");
+const router = express.Router();
 const model = require("../Models/ContactsModel");
 
-router.get('/',(req,res)=>{
-    
-    model.find()
-    .then((contact) => {
-      res.json(contact);
-      
-    })
-    .catch((err) => {
-      res.json(err);
-    }); // all contacts fetch
-})
-router.get("/:id", (req,res)=>{
-  model.findById(req.params.id)
-  .then((contact) => {
-    res.json(contact);
-  })
-  .catch((err) => {
-    res.json(err);
-  });// spesific contact fetch
-})
-
-router.post("/createuser", async (req,res,next)=>{  
-   
-
-try {
- 
-  const newContact = await new model({
-    name : req.body.name,
-    address : req.body.address,
-    phone : req.body.phone,
-    email : req.body.email,
-    mobile_phone : req.body.mobile_phone
-})
-
-newContact.save().then(responsee=>{
-
-  res.status(201).json(responsee);
-
-}).catch(err=>{
-  
-res.status(400).json(err)
-})
-
-
-} catch (error) {
- 
-res.status(400).json(error)
-}
- // create method
-})
-
-
-
-router.delete("/:id",(req,res)=>{
-    
-    model.findByIdAndDelete(req.params.id)
+router.get("/", (req, res) => {   // all contacts fetch
+  model
+    .find()
     .then((contact) => {
       res.json(contact);
     })
     .catch((err) => {
       res.json(err);
-    }); // delete method
- })
+    }); 
+});
+router.get("/:id", (req, res) => { // spesific contact fetch
+  model
+    .findById(req.params.id)
+    .then((contact) => {
+      res.json(contact);
+    })
+    .catch((err) => {
+      res.json(err);
+    }); 
+});
 
- router.put("/:id",(req,res)=>{
- 
-    model.findByIdAndUpdate(req.params.id, {
-        name : req.body.name,
-        address : req.body.address,
-        phone : req.body.phone,
-        mobile_phone : req.body.mobile_phone,
-        email : req.body.email
+router.post("/createuser", async (req, res, next) => { // create method
+  try {
+    const newContact = await new model({
+      name: req.body.name,
+      address: req.body.address,
+      phone: req.body.phone,
+      email: req.body.email,
+      mobile_phone: req.body.mobile_phone,
+    });
+
+    newContact
+      .save()
+      .then((responsee) => {
+        res.status(201).json(responsee);
       })
-        .then((contact) => {
-          res.json(contact);
-        })
-        .catch((err) => {
-          res.json(err);
-        });
- // uptade method
- })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+  
+});
 
- 
+router.delete("/:id", (req, res) => {  // delete method
+  model
+    .findByIdAndDelete(req.params.id)
+    .then((contact) => {
+      res.json(contact);
+    })
+    .catch((err) => {
+      res.json(err);
+    }); 
+});
 
- module.exports = router;
+router.put("/:id", (req, res) => {  
+  // uptade method
+  model
+    .findByIdAndUpdate(req.params.id, {
+      name: req.body.name,
+      address: req.body.address,
+      phone: req.body.phone,
+      mobile_phone: req.body.mobile_phone,
+      email: req.body.email,
+    })
+    .then((contact) => {
+      res.status(202).json(contact);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
+
+module.exports = router;

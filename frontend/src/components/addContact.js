@@ -3,29 +3,26 @@ import { Formik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+
 export default function AddContact() {
-
-
   const navigate = useNavigate();
-  const [results, setResults] = useState(null)
-  const [error, setError] = useState(null)
+  const [results, setResults] = useState(null);
+  const [error, setError] = useState(null);
   const getErrorView = () => {
     return (
       <div>
-        Name or phone must be unique!
-        <button onClick={() => navigate("/") }>
+        <h1>Name or phone must be unique!</h1>
+        <button className="btn btn-danger " onClick={() => navigate("/")}>
           Try again
         </button>
       </div>
-    )
-  }
+    );
+  };
 
-
-  const addContactPage = () =>{
-    return <div>
-      <h1 className="m-3">Add Contact</h1>
+  const addContactPage = () => {
+    return (
+      <div>
+        <h1 className="m-3">Add Contact</h1>
         <Formik
           initialValues={{
             name: "",
@@ -36,20 +33,19 @@ export default function AddContact() {
           }}
           validate={(values) => {
             const errors = {};
-            if(!values.name){
-             errors.name = "Name Required"     
+            if (!values.name) {
+              errors.name = "Name Required";
             }
-            if(!values.address){
-              errors.address = "Address Required"
+            if (!values.address) {
+              errors.address = "Address Required";
             }
-            if(!values.phone){
-              errors.phone = "Phone Required"
-            }
-            else if(values.phone.length > 11 || values.phone.length < 11 ){
-              errors.phone = "Phone is wrong format."
+            if (!values.phone) {
+              errors.phone = "Phone Required";
+            } else if (values.phone.length > 11 || values.phone.length < 11) {
+              errors.phone = "Phone is wrong format.";
             }
             if (!values.email) {
-              errors.email=" Email Required"
+              errors.email = " Email Required";
             } else if (
               !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
             ) {
@@ -59,26 +55,22 @@ export default function AddContact() {
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout( async () => {
-          
-
-              console.log(JSON.stringify(values, null, 2));
-
+            setTimeout(async () => {
               try {
-                const response = await axios.post("http://localhost:5000/api/createuser",values)
-                setResults(response.data)
-                 
-                setError(null)
-                navigate("/")
+                const response = await axios.post(
+                  "http://localhost:5000/api/createuser",
+                  values
+                );
+                setResults(response.data);
+
+                setError(null);
+                navigate("/");
               } catch (err) {
-                
-                setError(err)
-                
+                setError(err);
               }
-       
+
               setSubmitting(false);
-             
-            },400);
+            }, 400);
           }}
         >
           {({
@@ -89,9 +81,8 @@ export default function AddContact() {
             handleBlur,
             handleSubmit,
             isSubmitting,
-           
           }) => (
-            <form onSubmit={handleSubmit} method="POST" >
+            <form onSubmit={handleSubmit} method="POST">
               <div className="mb-3">
                 <label htmlFor="name" className="form-label mx-3">
                   Contact Name
@@ -102,7 +93,7 @@ export default function AddContact() {
                   value={values.name}
                   onChange={handleChange}
                 />
-                  {errors.name && touched.name && errors.name } 
+                {errors.name && touched.name && errors.name}
               </div>
               <div className="mb-3">
                 <label htmlFor="address" className="form-label mx-3">
@@ -114,7 +105,7 @@ export default function AddContact() {
                   value={values.address}
                   onChange={handleChange}
                 />
-                {errors.address && touched.address && errors.address }
+                {errors.address && touched.address && errors.address}
               </div>
               <div className="mb-3">
                 <label htmlFor="phone" className="form-label mx-3">
@@ -126,7 +117,7 @@ export default function AddContact() {
                   value={values.phone}
                   onChange={handleChange}
                 />
-                {errors.phone && touched.phone && errors.phone }
+                {errors.phone && touched.phone && errors.phone}
               </div>
               <div className="mb-3">
                 <label htmlFor="mobile_phone" className="form-label mx-3">
@@ -138,37 +129,35 @@ export default function AddContact() {
                   value={values.mobile_phone}
                   onChange={handleChange}
                 />
-                  {errors.mobile_phone && touched.mobile_phone && errors.mobile_phone }
+                {errors.mobile_phone &&
+                  touched.mobile_phone &&
+                  errors.mobile_phone}
               </div>
               <div className="mb-3">
-                        <label htmlFor="email" className="form-label mx-3">
-                          Email
-                        </label>
-                        <input type="mail" id="email" 
-                        value={values.email}
-                        onChange={handleChange}
-                        />
-                         {errors.email && touched.email && errors.email}
-                      </div>
-             
-             
-              <button 
-              
-              type="submit" className="btn btn-success m-3" disabled={isSubmitting}>
+                <label htmlFor="email" className="form-label mx-3">
+                  Email
+                </label>
+                <input
+                  type="mail"
+                  id="email"
+                  value={values.email}
+                  onChange={handleChange}
+                />
+                {errors.email && touched.email && errors.email}
+              </div>
+
+              <button
+                type="submit"
+                className="btn btn-success m-3"
+                disabled={isSubmitting}
+              >
                 Add Contact
               </button>
             </form>
           )}
         </Formik>
-    </div>
-  }
-    return (
-
-      <div>
-{  error ?
-           getErrorView() : addContactPage()
-        }
       </div>
     );
-  
+  };
+  return <div>{error ? getErrorView() : addContactPage()}</div>;
 }

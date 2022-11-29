@@ -95,11 +95,11 @@ getContact = async ()=>{
         <tbody>
           
          {
-          
-          filteredContact.map((contact,i) =>{
+          // MAPPING MY CONTACT LİST 
+          filteredContact.map((contact,key) =>{
                 const {id,name,address,phone,mobile_phone,email} = contact;
                 return <Contact
-                key={i}
+                key={key}
                 id = {id}
                 name = {name}
                 address = {address}

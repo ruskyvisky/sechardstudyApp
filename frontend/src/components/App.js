@@ -2,7 +2,7 @@ import React from "react";
 
 import ContactList from "./contactList";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App(props) {
@@ -10,24 +10,25 @@ export default function App(props) {
 
   return (
     <div className="container">
-       <ToastContainer position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light" ></ToastContainer>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000} /*  TOAST İMPORTİNG MAİN PAGE */
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
       <ContactList />
       <button
         className="btn btn-primary"
-        onClick={() => navigate("addcontact")}
+        onClick={() => navigate("addcontact")} // NAVIGATING ADD CONTACT
       >
         Add Contact
       </button>
-     
     </div>
   );
 }

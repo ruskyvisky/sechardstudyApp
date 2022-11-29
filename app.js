@@ -1,39 +1,37 @@
 // MODULES
-const express = require('express')
-const app = express()  // 
-const mongoose = require("mongoose")
-const bodyParser = require("body-parser")
-const router = require("./Routers/routers")
-const cors=require("cors");
+const express = require("express");
+const app = express(); //
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const router = require("./Routers/routers");
+const cors = require("cors");
 
 // VARİABLES
-const PORT = 5000 || process.env.PORT;
+const PORT = 5000 
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 
-const corsOptions ={
-    origin:'*', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200,
- }
- 
+app.use(cors(corsOptions)); // Use this after the variable declaration
 
-app.use(cors(corsOptions)) // Use this after the variable declaration
- 
-app.use(bodyParser.json()) // 
+app.use(bodyParser.json()); 
 
-app.use("/api",router); 
+app.use("/api", router); // middleware
 
-mongoose.connect("mongodb+srv://ruskyvisky:numan123@phonecluster.jlgueqe.mongodb.net/?retryWrites=true&w=majority",
-(e) => {
-    if(e){
-        console.log(e);
+mongoose.connect(
+  "mongodb+srv://ruskyvisky:numan123@phonecluster.jlgueqe.mongodb.net/?retryWrites=true&w=majority",
+  (e) => {
+    if (e) {
+      console.log(e);
+    } else {
+      console.log("Connected.");
     }
-    else{
-        console.log("Connected.")
-    }
-}
-)
+  }
+);
 
-
-app.listen(PORT,()=>{ // port dinleme
-    console.log("5000 portunu dinliyoruz haberin olsun ")
-})
+app.listen(PORT, () => {
+  // port dinleme
+  console.log("5000 portunu dinliyoruz haberin olsun ");
+});
